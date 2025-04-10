@@ -13,12 +13,7 @@ phases:
 
   post_build:
     commands:
-      - echo Build completed
-      - echo Pushing the Docker image to Amazon ECR...
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
       - docker push 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
-      - echo "Build and push completed successfully!"
-      - printf '[{"name":"%s","imageUri":"%s"}]' "cosc1209-finals" "761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals" > imagedefinitions.json
-
-artifacts:
-  files: imagedefinitions.json
 

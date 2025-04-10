@@ -8,7 +8,7 @@ phases:
     commands:
       - echo Build started
       - echo Building the Docker image
-      - docker built -t cosc1209-finals .
+      - docker build -t cosc1209-finals .
       - docker tag cosc1209-finals:latest 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
 
   post_build:

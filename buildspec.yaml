@@ -5,20 +5,14 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 761018853069.dkr.ecr.us-east-1.amazonaws.com
+  build:
     commands:
-      - echo Build started
-      - echo Building the Docker image
-      - docker build -t cosc1209-finals .
-      - docker tag cosc1209-finals:latest 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
-
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t cosc1209-finals/latest .
+      - docker tag cosc1209-finals/latest 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals/latest    
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
-      - echo "Build and push completed successfully!"
-      - printf '[{"name":"%s","imageUri":"%s"}]' "cosc1209-finals" "761018853069.dkr.ecr.us-east-1.amazonaws.com" > imagedefinitions.json
-
-artifacts:
-  files: imagedefinitions.json
-
+      - docker push 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals/latest

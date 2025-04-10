@@ -8,7 +8,6 @@ phases:
     commands:
       - echo Build started
       - echo Building the Docker image
-      - docker build -t cosc1209-finals .
       - docker 
       - docker tag hidelarosa14/cosc1209-app:latest 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
 

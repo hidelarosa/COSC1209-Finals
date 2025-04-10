@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 761018853069.dkr.ecr.us-east-1.amazonaws.com
+    commands:
+      - echo Build started
+      - echo Building the Docker image
+      - docker 
+      - docker tag hidelarosa14/cosc1209-app:latest 761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals:latest
+
+  post_build:
+    commands:
+      - echo Build completed
+      - echo Pushing the Docker image to Amazon ECR...
+      - docker push 761018853069.dkr.ecr.us-east-1.amazonaws.com/finals-repo:latest
+      - echo "Build and push completed successfully!"
+      - printf '[{"name":"%s","imageUri":"%s"}]' "app" "761018853069.dkr.ecr.us-east-1.amazonaws.com/cosc1209-finals" > imagedefinitions.json
+
+artifacts:
+  files: imagedefinitions.json
+
